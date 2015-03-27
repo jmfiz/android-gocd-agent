@@ -7,16 +7,15 @@ MAINTAINER jmfiz <jmfiz@paradigmatecnologico.com>
 
 #utils & troubleshooting sdk
 RUN \
-	apt-get update && \
-	apt-get upgrade && \
+	apt-get update && apt-get upgrade -y && \
 	apt-get install -q -y wget && \
 	dpkg --add-architecture i386 && \
-	apt-get update && \
-	apt-get install libncurses5:i386 libstdc++6:i386 zlib1g:i386
+	apt-get update -y && \
+	apt-get install -y libncurses5:i386 libstdc++6:i386 zlib1g:i386
 
 # Install Java.
 RUN \
-  apt-get update && \
+  apt-get update -y && \
   apt-get install -y openjdk-7-jdk && \
   rm -rf /var/lib/apt/lists/*
 
