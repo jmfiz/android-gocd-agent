@@ -7,6 +7,8 @@ MAINTAINER jmfiz <jmfiz@paradigmatecnologico.com>
 
 #utils & troubleshooting sdk
 RUN \
+	apt-get update && \
+	apt-get upgrade && \
 	apt-get install -q -y wget && \
 	dpkg --add-architecture i386 && \
 	apt-get update && \
