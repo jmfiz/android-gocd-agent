@@ -34,11 +34,19 @@ RUN chmod -R 777 /opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 RUN mkdir -p /opt/tools
-COPY sdk_android.sh /opt/tools/android-accept-licenses.sh
+#COPY sdk_android.sh /opt/tools/android-accept-licenses.sh
 ENV PATH ${PATH}:/opt/tools
 
-RUN chmod 755 /opt/tools/android-accept-licenses.sh
-RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --filter tools --no-ui --all"]
+RUN \
+  apt-get update -y && \
+  apt-get install -q -y expect
+
+# Install Android tools
+RUN echo y | android update sdk --filter platform,tool,platform-tool,extra,addon-google_apis-google-19,addon-google_apis_x86-google-19,build-tools-19.1.0 --no-ui -a
+
+
+#RUN chmod 755 /opt/tools/android-accept-licenses.sh
+#RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --filter tools --no-ui --all"]
 RUN chmod -R 777 /opt/android-sdk-linux
 
 #Start agent
