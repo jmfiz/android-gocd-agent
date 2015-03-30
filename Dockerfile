@@ -36,12 +36,7 @@ RUN chmod -R 777 /opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 RUN mkdir -p /opt/tools
-#COPY sdk_android.sh /opt/tools/android-accept-licenses.sh
 ENV PATH ${PATH}:/opt/tools
-
-RUN \
-  apt-get update -y && \
-  apt-get install -q -y expect
 
 # Install Android tools
 RUN echo y | android update sdk --filter tools,platform-tools,build-tools-22.0.1,build-tools-19.1.0,build-tools-19.0.1,android-19,sys-img-armeabi-v7a-android-19,sys-img-x86-android-19,addon-google_apis_x86-google-19,addon-google_apis-google-19,extra-google-google_play_services,extra-google-m2repository --no-ui -a
